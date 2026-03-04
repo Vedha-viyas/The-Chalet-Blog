@@ -1,0 +1,71 @@
+:root{
+  /* Colors tuned to your palette */
+  --ghost-thumb: rgba(255,255,255,0.45);
+  --ghost-thumb-hover: rgba(255,255,255,0.65);
+  --ghost-thumb-active: rgba(255,255,255,0.9);
+
+  /* Geometry */
+  --ghost-track-hitbox: 14px; /* invisible clickable area, if enabled */
+  --ghost-thumb-width: 6px;   /* visible thumb width */
+  --ghost-thumb-min: 48px;    /* minimum usable size */
+}
+
+html, body { height: 100%; }
+
+body{
+  margin: 0;
+  /* ✅ Disable browser/window scrolling (and its scrollbar) */
+  overflow: hidden;
+  /* If you previously added scrollbar-gutter/styling for body, remove it */
+}
+
+/* The REAL scroll happens here */
+#scroll-root{
+  height: 100dvh;              /* full viewport height, dynamic on mobile */
+  overflow-y: auto;            /* this element scrolls */
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch; /* smooth on iOS */
+
+  /* Hide its native scrollbar everywhere */
+  scrollbar-width: none;       /* Firefox */
+  -ms-overflow-style: none;    /* old IE/Edge */
+}
+#scroll-root::-webkit-scrollbar{ display:none; } /* Chromium/Safari */
+
+/* ===== Overlay scrollbar (content stays behind) ===== */
+#ghost-scrollbar{
+  position: fixed;
+  top: 0;
+  right: 0;       
+  padding: 10px 0;
+  height: 100dvh;
+  width: var(--ghost-track-hitbox);
+  z-index: 9999;
+  pointer-events: none;        /* don't block clicks into content (thumb re-enables) */
+}
+
+#ghost-scrollbar[hidden] {
+  display: none !important;
+}
+
+
+/* Thumb only (no visible track) */
+#ghost-thumb{
+  position: absolute;
+  right: calc((var(--ghost-track-hitbox) - var(--ghost-thumb-width)) / 2);
+  width: var(--ghost-thumb-width);
+  height: var(--ghost-thumb-min); /* JS updates exact size */
+  background: var(--ghost-thumb);
+  border-radius: 999px;
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,0.08) inset,
+    0 1px 8px rgba(0,0,0,0.08);
+  transition: background-color 120ms ease, opacity 120ms ease;
+  pointer-events: auto;        /* thumb is draggable */
+}
+
+#ghost-thumb:hover   { background: var(--ghost-thumb-hover); }
+#ghost-thumb:active  { background: var(--ghost-thumb-active); }
+
+/* Optional: hide thumb when there's nothing to scroll (set by JS too) */
+#ghost-thumb[hidden] { opacity: 0; pointer-events: none; }

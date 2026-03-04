@@ -1,0 +1,32 @@
+// Footer component styles
+
+.footer {
+  // Footer container styling
+}
+
+.container {
+  // Footer inner container
+}
+
+.content {
+  // Footer content wrapper
+}
+
+.copyright {
+  // Copyright text styling
+  margin: 0;
+}
+
+.links {
+  // Links container
+}
+
+.link {
+  // Individual footer link
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    // Hover state for links
+  }
+}

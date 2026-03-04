@@ -1,0 +1,79 @@
+// Portfolio Page component styles
+
+.portfolioPage {
+  // Portfolio page container
+}
+
+.portfolioHeader {
+  // Portfolio header section
+}
+
+.pageTitle {
+  // Page title
+  margin: 0;
+}
+
+.subtitle {
+  // Page subtitle
+  margin: 0;
+}
+
+// Projects Section
+.projectsSection {
+  // Projects section container
+}
+
+.projectsGrid {
+  // Projects grid layout
+  display: grid;
+}
+
+.projectItem {
+  // Individual project item
+}
+
+.projectImageWrapper {
+  // Project image wrapper
+}
+
+.projectContent {
+  // Project content section
+}
+
+.projectTitle {
+  // Project title
+  margin: 0;
+}
+
+.projectDescription {
+  // Project description
+  margin: 0;
+}
+
+.technologies {
+  // Technologies container
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+}
+
+.tech {
+  // Individual technology tag
+  display: inline-block;
+}
+
+.projectLinks {
+  // Project links container
+  display: flex;
+  gap: 0;
+}
+
+.projectLink {
+  // Project link styling
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    // Hover state
+  }
+}

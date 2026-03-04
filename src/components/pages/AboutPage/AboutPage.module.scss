@@ -1,0 +1,72 @@
+// About Page component styles
+
+.aboutPage {
+  // About page main container
+}
+
+.aboutHero {
+  // About hero section
+}
+
+.aboutContent {
+  // About content wrapper
+}
+
+.pageTitle {
+  // Page title styling
+  margin: 0;
+}
+
+.introduction {
+  // Introduction text
+  margin: 0;
+}
+
+// Story Section
+.story {
+  // Story section
+}
+
+.storyContent {
+  // Story content wrapper
+}
+
+.storyText {
+  // Story paragraph text
+  margin: 0;
+}
+
+// Expertise Section
+.expertise {
+  // Expertise section
+}
+
+.sectionTitle {
+  // General section title
+  margin: 0;
+}
+
+.expertiseList {
+  // Expertise list container
+  display: grid;
+}
+
+.expertisItem {
+  // Individual expertise item
+}
+
+.expertiseTitle {
+  // Expertise category title
+  margin: 0;
+}
+
+.expertiseTech {
+  // Technology list
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    // List item styling
+  }
+}

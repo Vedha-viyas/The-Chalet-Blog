@@ -1,0 +1,136 @@
+// Contact Page component styles
+
+.contactPage {
+  // Contact page container
+}
+
+.contactHeader {
+  // Contact header section
+}
+
+.pageTitle {
+  // Page title
+  margin: 0;
+}
+
+.subtitle {
+  // Page subtitle
+  margin: 0;
+}
+
+// Contact Content
+.contactContent {
+  // Contact content wrapper
+  display: grid;
+}
+
+.contactForm {
+  // Contact form container
+}
+
+.form {
+  // Form element styling
+}
+
+.formGroup {
+  // Form group container
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  // Form label styling
+}
+
+.input {
+  // Text input styling
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+
+  &:focus {
+    // Focus state
+    outline: none;
+  }
+}
+
+.textarea {
+  // Textarea styling
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  resize: vertical;
+
+  &:focus {
+    // Focus state
+    outline: none;
+  }
+}
+
+.submitButton {
+  // Submit button styling
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+
+  &:hover {
+    // Hover state
+  }
+
+  &:active {
+    // Active state
+  }
+}
+
+// Contact Info Section
+.contactInfo {
+  // Contact info container
+}
+
+.infoTitle {
+  // Info section title
+  margin: 0;
+}
+
+.infoList {
+  // Info list container
+}
+
+.infoItem {
+  // Individual info item
+}
+
+.infoLabel {
+  // Info label
+  margin: 0;
+}
+
+.infoLink {
+  // Info link styling
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    // Hover state
+  }
+}
+
+.socialLinks {
+  // Social links container
+  display: flex;
+  gap: 0;
+}
+
+.socialLink {
+  // Individual social link
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    // Hover state
+  }
+}

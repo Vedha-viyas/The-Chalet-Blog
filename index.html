@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>the-chalet-blog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Pacifico&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/alire" rel="stylesheet">
+</head>
+
+<body>
+
+  <div id="scroll-root" tabindex="0">
+    <div id="root"></div>
+  </div>
+
+  <div id="ghost-scrollbar" aria-hidden="true">
+    <div id="ghost-thumb"></div>
+  </div>
+
+  <script type="module" src="/src/main.tsx"></script>
+  <script>
+    (function () {
+      const scrollEl = document.getElementById('scroll-root');
+      const bar = document.getElementById('ghost-scrollbar');
+      const thumb = document.getElementById('ghost-thumb');
+      if (!scrollEl || !bar || !thumb) return;
+
+      const cssNum = (el, prop) =>
+        parseFloat(getComputedStyle(el).getPropertyValue(prop)) || 0;
+
+      function getMaxScroll() {
+        return Math.max(0, scrollEl.scrollHeight - scrollEl.clientHeight);
+      }
+
+      function updateThumb() {
+        const maxScroll = getMaxScroll();
+
+        // === No overflow → hide the entire overlay ===
+        if (maxScroll <= 0) {
+          bar.setAttribute('hidden', '');
+          // Reset thumb (not required, but keeps state clean)
+          thumb.setAttribute('hidden', '');
+          thumb.style.height = '0px';
+          thumb.style.transform = 'translateY(0)';
+          return;
+        }
+
+        // There is overflow → ensure overlay is visible
+        bar.removeAttribute('hidden');
+        thumb.removeAttribute('hidden');
+
+        const barRect = bar.getBoundingClientRect();
+        const barH = barRect.height;
+
+        const insetTop = cssNum(bar, 'padding-top');
+        const insetBottom = cssNum(bar, 'padding-bottom');
+
+        // Proportional thumb size; enforce a minimum size for usability
+        const ratio = scrollEl.clientHeight / scrollEl.scrollHeight;
+        const minSize =
+          parseInt(getComputedStyle(document.documentElement)
+            .getPropertyValue('--ghost-thumb-min')) || 48;
+        const usableTrack = Math.max(0, barH - insetTop - insetBottom);
+        const size = Math.max(minSize, Math.round(usableTrack * ratio));
+
+        const track = Math.max(0, usableTrack - size); // movable distance
+        const progress = scrollEl.scrollTop / maxScroll; // 0..1
+        const top = insetTop + progress * track;
+
+        thumb.style.height = `${size}px`;
+        thumb.style.transform = `translateY(${Math.round(top)}px)`;
+      }
+
+      // Dragging with insets respected
+      let dragging = false, pointerId = null, dragOffset = 0;
+
+      thumb.addEventListener('pointerdown', (e) => {
+        if (bar.hasAttribute('hidden')) return; // no-op when hidden
+        dragging = true;
+        pointerId = e.pointerId;
+        thumb.setPointerCapture(pointerId);
+        const rect = thumb.getBoundingClientRect();
+        dragOffset = e.clientY - rect.top;
+        document.body.style.userSelect = 'none';
+      });
+
+      thumb.addEventListener('pointermove', (e) => {
+        if (!dragging) return;
+        const barRect = bar.getBoundingClientRect();
+        const barH = barRect.height;
+
+        const insetTop = cssNum(bar, 'padding-top');
+        const insetBottom = cssNum(bar, 'padding-bottom');
+
+        const size = thumb.getBoundingClientRect().height;
+        const track = Math.max(0, (barH - insetTop - insetBottom) - size);
+
+        let y = e.clientY - barRect.top - dragOffset;
+        y = Math.max(insetTop, Math.min(insetTop + track, y));  // clamp within 5px insets
+
+        const maxScroll = getMaxScroll();
+        const progress = track > 0 ? (y - insetTop) / track : 0;
+        scrollEl.scrollTop = progress * maxScroll;
+      });
+
+      thumb.addEventListener('pointerup', () => {
+        if (!dragging) return;
+        dragging = false;
+        if (pointerId != null) thumb.releasePointerCapture(pointerId);
+        pointerId = null;
+        document.body.style.userSelect = '';
+      });
+
+      // Keep in sync with content and viewport changes
+      scrollEl.addEventListener('scroll', updateThumb, { passive: true });
+      window.addEventListener('resize', updateThumb);
+
+      // Watch for dynamic content changes (images load, React route changes, etc.)
+      const ro = new ResizeObserver(updateThumb);
+      ro.observe(scrollEl);
+
+      // Initial render
+      updateThumb();
+    })();
+  </script>
+</body>
+
+</html>

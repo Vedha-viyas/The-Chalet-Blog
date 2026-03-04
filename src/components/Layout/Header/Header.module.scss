@@ -1,0 +1,108 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 0 40px;
+  width: -webkit-fill-available;
+  min-height: 120px;
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  z-index: 0;
+}
+.button_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.reservation_button {
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 20px;
+  background-color: transparent;
+  min-width: 115px;
+  height: 40px;
+
+  border: 1px solid #fbf3e7;
+  border-radius: 80px;
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+
+  font-family: "Nunito Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 1px;
+  color: #fbf3e7;
+}
+
+.brand_logo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 10px;
+
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.brand_logo span {
+    font-family: 'Alire', sans-serif;
+//   font-family: "Pacifico";
+//   font-style: normal;
+//   font-weight: 400;
+  font-size: 60px;
+//   line-height: 105px;
+  text-align: center;
+  color: #fbf3e7;
+}
+
+.menu_wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: transparent;
+  flex: none;
+  order: 2;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.menu_button {
+  font-family: "Nunito Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  background-color: transparent;
+  border: none;
+  color: #fbf3e7;
+  letter-spacing: 1px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
